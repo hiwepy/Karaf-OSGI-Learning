@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn"
+	xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+	xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
+	expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+
+	<process id="checkactiviti" name="自动执行例子" isExecutable="true">
+		<startEvent id="startevent1" name="自动执行"></startEvent>
+
+		<serviceTask id="servicetask1" name="一级转发"
+			activiti:delegateExpression="${camel}"></serviceTask>
+
+		<serviceTask id="servicetask2" name="二级转发"
+			activiti:delegateExpression="${camel}"></serviceTask>
+
+		<userTask id="usertask1" name="UserTask"
+			activiti:delegateExpression="${camel}"></userTask>
+
+		<endEvent id="endevent1" name="结束"></endEvent>
+
+
+		<sequenceFlow id="flow1" sourceRef="startevent1"
+			targetRef="servicetask1"></sequenceFlow>
+		<sequenceFlow id="flow2" sourceRef="servicetask1"
+			targetRef="servicetask2"></sequenceFlow>
+		<sequenceFlow id="flow3" sourceRef="servicetask2"
+			targetRef="usertask1"></sequenceFlow>
+		<sequenceFlow id="flow4" sourceRef="usertask1" targetRef="endevent1"></sequenceFlow>
+
+
+	</process>
+
+</definitions>  

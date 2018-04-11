@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xmlns:cxfcore="http://cxf.apache.org/blueprint/core"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd   
+    http://aries.apache.org/xmlns/jpa/v1.1.0 http://aries.apache.org/schemas/jpa/jpa_110.xsd   
+    http://aries.apache.org/xmlns/transactions/v1.0.0 http://aries.apache.org/schemas/transaction/transactionv10.xsd  
+    http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd   
+    http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd  
+    http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+
+	<!--Web service -->
+	<camel-cxf:cxfEndpoint id="myService"
+		address="http://0.0.0.0:8018/myosgi/camelwebservice" serviceClass="com.cn.yyc.osgi.imywebservice"
+		bindingId="http://www.w3.org/2003/05/soap/bindings/HTTP/">
+		<camel-cxf:properties>
+			<entry key="dataFormat" value="POJO" />
+		</camel-cxf:properties>
+	</camel-cxf:cxfEndpoint>
+
+	<bean id="test1" class="com.cn.yyc.Test1" />
+	<camelContext id="myCamelContext"
+		xmlns="http://camel.apache.org/schema/blueprint" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+		<route>
+			<from uri="myService" />
+			<log message="Request:${in.header.operationName}" />
+			<choice>
+				<when>
+					<simple>${in.header.operationName} == 'test1'</simple>
+					<to uri="bean:test1" />
+				</when>
+				<otherwise>
+					<to uri="bean:test" />
+				</otherwise>
+			</choice>
+		</route>
+	</camelContext>
+</blueprint>  

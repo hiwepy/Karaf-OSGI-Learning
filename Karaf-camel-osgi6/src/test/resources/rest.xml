@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0">
+	<feature name='yyc-Camel-restlet' version='1.0.0' install="auto">
+	
+		<bundle start-level='50'>mvn:commons-codec/commons-codec/1.9</bundle>
+		<bundle start-level='50'>mvn:org.apache.httpcomponents/httpcore-osgi/4.3.2</bundle>
+		<bundle start-level='50'>mvn:org.apache.httpcomponents/httpclient-osgi/4.3.3</bundle>
+
+		<bundle start-level='50'>http://maven.restlet.com/org/restlet/osgi/org.restlet/2.2.1/org.restlet-2.2.1.jar</bundle>
+		<bundle start-level='50'>http://maven.restlet.com/org/restlet/osgi/org.restlet.ext.httpclient/2.2.1/org.restlet.ext.httpclient-2.2.1.jar</bundle>
+		<bundle start-level='50'>mvn:org.apache.camel/camel-restlet/2.14.1</bundle>
+	</feature>
+	
+</features> 
