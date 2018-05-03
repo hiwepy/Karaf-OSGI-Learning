@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.vindell</groupId>
+		<artifactId>Karaf-OSGI-Learning</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>Karaf-webconsole</artifactId>
+	<packaging>bundle</packaging>
+    <name>Bundle Name</name>
+
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Bundle-DocURL>http://felix.apache.org/site/apache-karaf.html</Bundle-DocURL>
+                        <Fragment-Host>org.apache.karaf.webconsole.console;bundle-version="[3,4)"</Fragment-Host>
+                        <Export-Package>!*</Export-Package>
+                        <Import-Package>
+                            javax.servlet;version=2.4,
+                            javax.servlet.http;version=2.4,
+                            !org.apache.felix.webconsole*,
+                            org.apache.aries.blueprint,
+                            org.osgi.service.blueprint.container,
+                            org.osgi.service.blueprint.reflect,
+                            *
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
