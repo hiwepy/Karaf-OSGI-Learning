@@ -526,6 +526,13 @@
 						<maxmem>512M</maxmem>
 					</configuration>
 				</plugin>
+				<!-- https://mvnrepository.com/artifact/org.apache.felix/maven-bundle-plugin -->
+				<plugin>
+				    <groupId>org.apache.felix</groupId>
+				    <artifactId>maven-bundle-plugin</artifactId>
+				    <version>${maven-bundle-plugin.version}</version>
+				    <extensions>true</extensions>
+				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
 				<plugin>
 					<!-- 发布插件 ：将项目输出构件部署到远程仓库 -->
